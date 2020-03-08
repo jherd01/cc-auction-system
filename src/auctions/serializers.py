@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import Users
+from .models import User, Item, Auction, Bid
 
-class UsersSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Users
+        model = User
         fields = (
             'first_name', 
             'last_name',
@@ -15,23 +15,33 @@ class UsersSerializer(serializers.ModelSerializer):
             'dob'
         )
 
-# class ItemSerializer(serializers.ModelSerializer):
-    # class Meta:
-        # model = Item
-        # fields = (
-            
-        # )
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = (
+            'seller_id',
+            'title',
+            'description',
+            'condition',
+            'created'
+        )
 
-# class AuctionSerializer(serializers.ModelSerializer):
-    # class Meta:
-        # model = Auction
-        # fields = (
-            
-        # )
+class AuctionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Auction
+        fields = (
+            'item_id',
+            'start',
+            'end',
+            'duration'
+        )
         
-# class BidSerializer(serializers.ModelSerializer):
-    # class Meta:
-        # model = Bid
-        # fields = (
-            
-        # )
+class BidSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bid
+        fields = (
+            'auction_id',
+            'user_id',
+            'bid_amount',
+            'timestamp'
+        )

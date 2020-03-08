@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Users(models.Model):
+class User(models.Model):
     auth_id = models.IntegerField(unique=True, editable=False)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -13,7 +13,7 @@ class Users(models.Model):
     dob = models.DateField()
 
 class Item(models.Model):
-    seller_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    seller_id = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     NEW = 'new'
@@ -53,6 +53,6 @@ class Auction(models.Model):
     
 class Bid(models.Model):
     auction_id = models.ForeignKey(Auction, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     bid_amount = models.DecimalField(max_digits=10, decimal_places=2)
     timestamp = models.DateField(auto_now_add=True)
